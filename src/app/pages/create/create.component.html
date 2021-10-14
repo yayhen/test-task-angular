@@ -1,0 +1,33 @@
+<form [formGroup]="createNewUserForm">
+  <label for="first-name">First name</label>
+  <input type="text" id="first-name" formControlName="firstName">
+  <div class="alert alert-danger"
+      *ngIf="createNewUserForm.controls['firstName'].invalid && createNewUserForm.controls['firstName'].touched">
+    Plase enter name
+  </div>
+  <br />
+  <label for="last-name">Last name</label>
+  <input type="text" id="last-name" formControlName="lastName">
+  <div class="alert alert-danger"
+      *ngIf="createNewUserForm.controls['lastName'].invalid && createNewUserForm.controls['lastName'].touched">
+    Plase enter lst name
+  </div>
+  <br />
+  <label for="date-of-birth">Date of birth</label>
+  <input type="date" id="date-of-birth" formControlName="dateOfBirth">
+  <br />
+  <div formArrayName="education">
+    <div *ngFor="let univercity of getEducations()['controls']; let i = index;">
+      <form formGroupName={{i}}>
+        <label for="univercity">Univercity</label>
+        <input type="text" id="univercity" formControlName="univercityName"><br />
+        <label for="univercity-start">Start</label>
+        <input type="date" id="univercity-start" formControlName="dateOfStart">
+        <label for="univercity-finish">finish</label>
+        <input type="date" id="univercity-finish" formControlName="dateOfFinish">
+      </form>
+    </div>
+    <button (click)="addUnivercity()">Add</button>
+  </div>
+  <button type="submit" (click)="addNewUser()">Create new user</button>
+</form>

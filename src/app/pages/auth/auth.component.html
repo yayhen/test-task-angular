@@ -1,0 +1,7 @@
+<form [formGroup]="logInForm">
+  <label for="log-in">Login</label>
+  <input type="text" id="log-in" formControlName="login"><br />
+  <label for="password">Password</label>
+  <input type="password" id="password" formControlName="password"><br />
+  <button type="submit" (click)="submitButtonHandler()">Log in</button>
+</form>
