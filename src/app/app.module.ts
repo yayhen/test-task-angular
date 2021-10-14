@@ -15,6 +15,7 @@ import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { LoginService } from './login.service';
 import { DataService } from './data.service';
+import { DataOfBirthDirective } from './shared/validators/data-of-birth.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DataService } from './data.service';
     UsersComponent,
     DetailsComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    DataOfBirthDirective
   ],
   imports: [
     BrowserModule,

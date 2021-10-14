@@ -15,6 +15,9 @@
   <br />
   <label for="date-of-birth">Date of birth</label>
   <input type="date" id="date-of-birth" formControlName="dateOfBirth">
+  <div class="alert alert-danger" *ngIf="createNewUserForm.controls['dateOfBirth'].errors?.dateOfBirthCorrect && createNewUserForm.controls['dateOfBirth'].touched">
+    Inncorrect date of birth
+  </div>
   <br />
   <div formArrayName="education">
     <div *ngFor="let univercity of getEducations()['controls']; let i = index;">
@@ -22,12 +25,20 @@
         <label for="univercity">Univercity</label>
         <input type="text" id="univercity" formControlName="univercityName"><br />
         <label for="univercity-start">Start</label>
-        <input type="date" id="univercity-start" formControlName="dateOfStart">
+        <select id="univercity-start" formControlName="dateOfStart">
+          <option *ngFor="let year of educationYears" [selected]="year==2010">{{year}}</option>
+        </select>
         <label for="univercity-finish">finish</label>
-        <input type="date" id="univercity-finish" formControlName="dateOfFinish">
+        <select id="univercity-finish" formControlName="dateOfFinish">
+          <option *ngFor="let year of educationYears" [selected]="year==2015">{{year}}</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="createNewUserForm.controls['education'].get(i.toString())!.errors?.datesIsCorrect">
+          Inncorrect dates of education
+        </div>
+        <button (click)="deleteUniversity(i)">-</button>
       </form>
     </div>
     <button (click)="addUnivercity()">Add</button>
   </div>
-  <button type="submit" (click)="addNewUser()">Create new user</button>
+  <button type="submit" (click)="addNewUser()" [disabled]="createNewUserForm.invalid">Create new user</button>
 </form>
