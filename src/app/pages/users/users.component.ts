@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +14,7 @@ export class UsersComponent implements OnInit {
   searchResults: any = [];
   isLoading = true;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, public loginService: LoginService) { }
   
   ngOnInit(): void {
     this.dataService.getUsersList().then(data => {this.users = data; this.isLoading = false;});

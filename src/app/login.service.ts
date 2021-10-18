@@ -28,5 +28,6 @@ export class LoginService {
 
   async logIn(userName: string) {
     await this.setUserStatus(await this.dataService.checkUserName(userName));
+    this.setIsLogged(true);
   }
 }
