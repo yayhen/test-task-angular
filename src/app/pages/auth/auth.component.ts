@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { LoginService } from 'src/app/login.service';
 export class AuthComponent implements OnInit {
   logInForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -18,19 +19,15 @@ export class AuthComponent implements OnInit {
 
   initForm() {
     this.logInForm = this.fb.group({
-      login: ['user'],
+      login: [''],
       password: [''],
     })
   }
 
-  submitButtonHandler() {
+  async submitButtonHandler() {
+    await this.loginService.logIn(this.logInForm.value.login);
     this.loginService.setIsLogged(true);
-    if(this.logInForm.value.login === 'admin') {
-      this.loginService.setUserStatus('admin');
-    }else {
-      this.loginService.setUserStatus('user');
-    }
-    console.log(this.loginService.getUserStatus());
+    this.router.navigate(['users']);
   }
 
 }

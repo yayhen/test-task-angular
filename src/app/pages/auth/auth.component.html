@@ -1,7 +1,11 @@
 <form [formGroup]="logInForm">
-  <label for="log-in">Login</label>
-  <input type="text" id="log-in" formControlName="login"><br />
-  <label for="password">Password</label>
-  <input type="password" id="password" formControlName="password"><br />
-  <button type="submit" (click)="submitButtonHandler()">Log in</button>
+  <div class="mb-3">
+    <label for="log-in" class="form-label" >Login</label>
+    <input type="text" class="form-control" id="log-in" formControlName="login" placeholder="Login"><br />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password"><br />
+  </div>
+  <button type="submit" class="btn btn-primary mb-3" (click)="submitButtonHandler()">Log in</button>
 </form>

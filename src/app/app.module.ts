@@ -16,6 +16,15 @@ import { EditComponent } from './pages/edit/edit.component';
 import { LoginService } from './login.service';
 import { DataService } from './data.service';
 import { DataOfBirthDirective } from './shared/validators/data-of-birth.directive';
+import { ModalComponent } from './components/modal/modal.component';
+import { SpinerComponent } from './components/spiner/spiner.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminGuard } from './guards/admin.guard';
+import { DateToAgePipe } from './pipes/date-to-age.pipe';
 
 @NgModule({
   declarations: [
@@ -28,14 +37,33 @@ import { DataOfBirthDirective } from './shared/validators/data-of-birth.directiv
     DetailsComponent,
     CreateComponent,
     EditComponent,
-    DataOfBirthDirective
+    DataOfBirthDirective,
+    ModalComponent,
+    SpinerComponent,
+    DateToAgePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      useDefaultLang: false,
+    }),
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [LoginService, DataService],
+  providers: [LoginService, DataService, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}

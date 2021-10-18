@@ -1,1 +1,13 @@
-<p>details works!</p>
+<div class="card" style="width: 18rem;">
+  <img *ngIf="info.photo!=null" class="card-img-top" src={{info.photo}} alt="Photo">
+  <img *ngIf="info.photo==null" class="card-img-top" src="../../../assets/images/anonim.png" alt="Photo">
+  <div class="card-body">
+    <h5 class="card-title"><span>{{info.firstName}}</span>&nbsp;<span>{{info.lastName}}</span></h5>
+    <p class="card-text">{{info.dateOfBirth | dateToAge}}&nbsp;years old</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    Education:
+    <!-- <li class="list-group-item">Education:</li> -->
+    <li *ngFor="let univercity of info.education" class="list-group-item fw-bold">{{univercity.univercityName}}<p class="list-group-item fw-normal">{{univercity.dateOfStart}}-{{univercity.dateOfFinish}}</p></li>
+  </ul>
+</div>

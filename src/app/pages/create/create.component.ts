@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
 import { dateOfBirthValidator, datesOfStudingValidator } from 'src/app/shared/validators/validators';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +16,7 @@ export class CreateComponent implements OnInit {
   defaultYearStartEducation = 2010;
   defaulsYearFinishEducation = 2015;
 
-  constructor(private fb: FormBuilder, private dataService: DataService) {
+  constructor(private fb: FormBuilder, private dataService: DataService, private toastr: ToastrService, private router: Router) {
     const currentYear = new Date().getFullYear();
     for(let i=1900; i<=currentYear+10; i++) {
       this.educationYears.push(i);
@@ -27,15 +29,18 @@ export class CreateComponent implements OnInit {
 
   initForm() {
     this.createNewUserForm = this.fb.group({
+      login: ['user', [Validators.required, Validators.minLength(3)]],
+      userType: ['user'],
       firstName: ['John', [Validators.required, Validators.minLength(2)]],
       lastName: ['Jones', [Validators.required, Validators.minLength(3)]],
       dateOfBirth: ['1980-01-01', dateOfBirthValidator()],
+      photo: [null],
       education: this.fb.array([
-        this.fb.group({
-          univercityName: [''],
-          dateOfStart: [this.defaultYearStartEducation],
-          dateOfFinish: [this.defaulsYearFinishEducation]
-        }, {validator: datesOfStudingValidator()})
+        // this.fb.group({
+        //   univercityName: [''],
+        //   dateOfStart: [this.defaultYearStartEducation],
+        //   dateOfFinish: [this.defaulsYearFinishEducation]
+        // }, {validator: datesOfStudingValidator()})
       ])
     })
   }
@@ -57,8 +62,21 @@ export class CreateComponent implements OnInit {
   }
 
   addNewUser() {
-    //this.dataService.addNewUser(this.createNewUserForm.value)
-    console.log(this.createNewUserForm.value);
+    this.dataService.addNewUser(this.createNewUserForm.value);
+    this.toastr.success('New user has been created');
+    this.router.navigate(['users']);
   }
 
+  changePhotoPickerHandler(event: any) {
+    let reader = new FileReader();
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.createNewUserForm.patchValue({
+          photo: reader.result
+        });
+      };
+    }
+  }
 }

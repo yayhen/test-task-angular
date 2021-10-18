@@ -1,4 +1,34 @@
-<p>users works!</p>
-<div>
-  {{users | json}}
+<div *ngIf="isLoading">
+  <app-spiner ></app-spiner>
 </div>
+<div class="search" style="max-width: 540px; margin: 0 auto">
+  <div class="input-group">
+    <input class="form-control" id="search-input" (keyup)="searchInputHandler($event)" placeholder="Search">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchButtonHandler()">Find</button>
+  </div>
+  <ul class="search-results">
+    <li *ngFor="let result of searchResults; let i = index">
+      <div class="search-result" [routerLink]="['/details', result.id]" *ngIf="i<10">
+        <span>{{result.firstName}}</span>&nbsp;<span>{{result.lastName}}</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<div class="card mb-3 mt-3" style="max-width: 540px; margin: 0 auto" *ngFor="let user of users" [routerLink]="['/details', user.id]">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img *ngIf="user.photo!=null" src={{user.photo}} class="img-fluid rounded-start" id={{user.id}} alt="Photo">
+      <img *ngIf="user.photo==null" src="../../../assets/images/anonim.png" class="img-fluid rounded-start" id={{user.id}} alt="Photo">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><span>{{user.firstName}}</span>&nbsp;<span>{{user.lastName}}</span></h5>
+        <p class="card-text"><small class="text-muted"><a [routerLink]="['/edit', user.id]">Edit</a></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="isModalDialogVisible" (isConfirmed)="modalIsConfirmed($event)"></app-modal>

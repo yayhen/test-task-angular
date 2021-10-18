@@ -1,1 +1,56 @@
-<p>edit works!</p>
+<div class="card" style="width: 18rem;" *ngIf="editUserForm">
+  <img *ngIf="info.photo!=null" class="card-img-top" src={{info.photo}} alt="Photo">
+  <img *ngIf="info.photo==null" class="card-img-top" src="../../../assets/images/anonim.png" alt="Photo">
+  <div class="card-body">
+    <form [formGroup]="editUserForm" *ngIf="editUserForm">
+      <label class="form-label" for="first-name">First name</label>
+      <input class="form-control" type="text" id="first-name" formControlName="firstName">
+      <div class="alert alert-danger"
+          *ngIf="editUserForm.controls['firstName'].invalid && editUserForm.controls['firstName'].touched">
+        Plase enter name
+      </div>
+      <br />
+      <label class="form-label" for="last-name">Last name</label>
+      <input class="form-control" type="text" id="last-name" formControlName="lastName">
+      <div class="alert alert-danger"
+          *ngIf="editUserForm.controls['lastName'].invalid && editUserForm.controls['lastName'].touched">
+        Plase enter lst name
+      </div>
+      <br />
+      <label class="form-label" for="date-of-birth">Date of birth</label>
+      <input type="date" id="date-of-birth" formControlName="dateOfBirth">
+      <div class="alert alert-danger" *ngIf="editUserForm.controls['dateOfBirth'].errors?.dateOfBirthCorrect && editUserForm.controls['dateOfBirth'].touched">
+        Inncorrect date of birth
+      </div>
+      <div class="mb-3">
+        <label for="photo-input">Photo:</label>
+        <input type="file" id="photo-input" (change)="changePhotoPickerHandler($event)" formControlName="photo">
+      </div>
+      <div formArrayName="education">
+        Education:
+        <div *ngFor="let univercity of getEducations()['controls']; let i = index;">
+          <form formGroupName={{i}} >
+            <label class="form-label" for="univercity">Univercity</label>
+            <input class="form-control" type="text" id="univercity" formControlName="univercityName"><br />
+            <label class="form-label" for="univercity-start">Start</label>
+            <select id="univercity-start" formControlName="dateOfStart">
+              <option *ngFor="let year of educationYears" [selected]="univercity.get('dateOfStart')!.value==year">{{year}}</option>
+            </select>
+            <label class="form-label" for="univercity-finish">finish</label>
+            <select id="univercity-finish" formControlName="dateOfFinish">
+              <option *ngFor="let year of educationYears" [selected]="univercity.get('dateOfFinish')!.value==year">{{year}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="editUserForm.controls['education'].get(i.toString())!.errors?.datesIsCorrect">
+              Inncorrect dates of education
+            </div>
+            <button class="btn btn-danger btn-sm" (click)="deleteUniversity(i)">-</button>
+          </form>
+        </div>
+        <button class="btn btn-success btn-sm" (click)="addUnivercity()">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+<button class="btn btn-success mb-3" (click)="editUser()">Confirm</button>
+<button class="btn btn-danger mb-3" (click)="deleteUserButtonHandler(id)">Delete user</button>
+<app-modal *ngIf="isModalDialogVisible" (isConfirmed)="modalIsConfirmed($event)"></app-modal>
