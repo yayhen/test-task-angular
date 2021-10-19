@@ -1,3 +1,57 @@
 {
-  "HELLO": "hello {{value}}"
+  "auth": {
+    "login": "Connexion",
+    "password": "Mot de passe",
+    "logIn": "Connexion"
+  },
+  "create": {
+    "login": "Connexion",
+    "user": "Utilisateur",
+    "admin": "Admin",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "inncorrectName": "Nom incorrect",
+    "incorrectLastName": "Nom de famille incorrect",
+    "dateOfBirth": "Date de naissance",
+    "photo": "Photo",
+    "education": "Éducation",
+    "univercity": "Univercity",
+    "start": "Démarrer",
+    "finish": "Terminer",
+    "incorrectDates": "Dates incorrectes",
+    "add": "Ajouter",
+    "createNewUser": "Créer un nouvel utilisateur"
+  },
+  "details": {
+    "yearsOld": "ans",
+    "education": "Éducation"
+  },
+  "edit": {
+    "login": "Connexion",
+    "user": "Utilisateur",
+    "admin": "Admin",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "inncorrectName": "Nom incorrect",
+    "incorrectLastName": "Nom de famille incorrect",
+    "dateOfBirth": "Date de naissance",
+    "photo": "Photo",
+    "education": "Éducation",
+    "univercity": "Univercity",
+    "start": "Démarrer",
+    "finish": "Terminer",
+    "incorrectDates": "Dates incorrectes",
+    "add": "Ajouter",
+    "createNewUser": "Créer un nouvel utilisateur",
+    "confirm": "Confirmer",
+    "delete": "supprimer"
+  },
+  "users": {
+    "search": "Chercher",
+    "edit": "Modifier"
+  },
+  "header": {
+    "createNewUser": "Créer un nouvel utilisateur",
+    "users": "Utilisateurs"
+  }
 }

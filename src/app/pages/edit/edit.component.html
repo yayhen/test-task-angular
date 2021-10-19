@@ -1,47 +1,47 @@
-<div class="card" style="width: 18rem;" *ngIf="editUserForm">
+<div class="card mb-3" style="width: 18rem;" *ngIf="editUserForm">
   <img *ngIf="info.photo!=null" class="card-img-top" src={{info.photo}} alt="Photo">
   <img *ngIf="info.photo==null" class="card-img-top" src="../../../assets/images/anonim.png" alt="Photo">
   <div class="card-body">
     <form [formGroup]="editUserForm" *ngIf="editUserForm">
-      <label class="form-label" for="first-name">First name</label>
+      <label class="form-label" for="first-name">{{'edit.firstName' | translate}}</label>
       <input class="form-control" type="text" id="first-name" formControlName="firstName">
       <div class="alert alert-danger"
           *ngIf="editUserForm.controls['firstName'].invalid && editUserForm.controls['firstName'].touched">
-        Plase enter name
+          {{'edit.incorrectName' | translate}}
       </div>
       <br />
-      <label class="form-label" for="last-name">Last name</label>
+      <label class="form-label" for="last-name">{{'edit.lastName' | translate}}</label>
       <input class="form-control" type="text" id="last-name" formControlName="lastName">
       <div class="alert alert-danger"
           *ngIf="editUserForm.controls['lastName'].invalid && editUserForm.controls['lastName'].touched">
-        Plase enter lst name
+          {{'edit.incorrectLastName' | translate}}
       </div>
       <br />
-      <label class="form-label" for="date-of-birth">Date of birth</label>
+      <label class="form-label" for="date-of-birth">{{'edit.dateOfBirth' | translate}}</label>
       <input type="date" id="date-of-birth" formControlName="dateOfBirth">
       <div class="alert alert-danger" *ngIf="editUserForm.controls['dateOfBirth'].errors?.dateOfBirthCorrect && editUserForm.controls['dateOfBirth'].touched">
-        Inncorrect date of birth
+        {{'edit.incorrectDates' | translate}}
       </div>
       <div class="mb-3">
-        <label for="photo-input">Photo:</label>
+        <label for="photo-input">{{'edit.photo' | translate}}:</label>
         <input type="file" id="photo-input" (change)="changePhotoPickerHandler($event)" formControlName="photo">
       </div>
       <div formArrayName="education">
-        Education:
+        {{'edit.education' | translate}}:
         <div *ngFor="let univercity of getEducations()['controls']; let i = index;">
           <form formGroupName={{i}} >
-            <label class="form-label" for="univercity">Univercity</label>
+            <label class="form-label" for="univercity">{{'edit.Univercity' | translate}}</label>
             <input class="form-control" type="text" id="univercity" formControlName="univercityName"><br />
-            <label class="form-label" for="univercity-start">Start</label>
+            <label class="form-label" for="univercity-start">{{'edit.start' | translate}}</label>
             <select id="univercity-start" formControlName="dateOfStart">
               <option *ngFor="let year of educationYears" [selected]="univercity.get('dateOfStart')!.value==year">{{year}}</option>
             </select>
-            <label class="form-label" for="univercity-finish">finish</label>
+            <label class="form-label" for="univercity-finish">{{'edit.finish' | translate}}</label>
             <select id="univercity-finish" formControlName="dateOfFinish">
               <option *ngFor="let year of educationYears" [selected]="univercity.get('dateOfFinish')!.value==year">{{year}}</option>
             </select>
             <div class="alert alert-danger" *ngIf="editUserForm.controls['education'].get(i.toString())!.errors?.datesIsCorrect">
-              Inncorrect dates of education
+              {{'edit.incorrectDates' | translate}}
             </div>
             <button class="btn btn-danger btn-sm" (click)="deleteUniversity(i)">-</button>
           </form>
@@ -51,6 +51,6 @@
     </form>
   </div>
 </div>
-<button class="btn btn-success mb-3" (click)="editUser()">Confirm</button>
-<button class="btn btn-danger mb-3" (click)="deleteUserButtonHandler(id)">Delete user</button>
+<button class="btn btn-success mb-3" (click)="editUser()">{{'edit.confirm' | translate}}</button>
+<button class="btn btn-danger mb-3" (click)="deleteUserButtonHandler(id)">{{'edit.delete' | translate}}</button>
 <app-modal *ngIf="isModalDialogVisible" (isConfirmed)="modalIsConfirmed($event)"></app-modal>

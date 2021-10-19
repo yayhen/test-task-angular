@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ContentComponent } from './content/content.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { UsersComponent } from './pages/users/users.component';
 import { DetailsComponent } from './pages/details/details.component';
@@ -25,13 +24,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminGuard } from './guards/admin.guard';
 import { DateToAgePipe } from './pipes/date-to-age.pipe';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
+import { OnlineDirective } from './directives/online.directive';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ContentComponent,
     AuthComponent,
     UsersComponent,
     DetailsComponent,
@@ -41,6 +45,7 @@ import { DateToAgePipe } from './pipes/date-to-age.pipe';
     ModalComponent,
     SpinerComponent,
     DateToAgePipe,
+    OnlineDirective,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,9 @@ import { DateToAgePipe } from './pipes/date-to-age.pipe';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [LoginService, DataService, AdminGuard],
+  providers: [LoginService, DataService, AdminGuard,
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

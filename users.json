@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "login": "user",
+      "userType": "user",
+      "firstName": "David",
+      "lastName": "Lastname",
+      "dateOfBirth": "1980-01-01",
+      "photo": null,
+      "education": [
+        {
+          "univercityName": "BSU",
+          "dateOfStart": "1999",
+          "dateOfFinish": "2005"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "login": "admin",
+      "userType": "admin",
+      "firstName": "Evgeniy",
+      "lastName": "Adminov",
+      "dateOfBirth": "1980-01-01",
+      "photo": null,
+      "education": [
+        {
+          "univercityName": "BSU",
+          "dateOfStart": "2014",
+          "dateOfFinish": "2019"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "login": "user2",
+      "userType": "user",
+      "firstName": "John",
+      "lastName": "Jones",
+      "dateOfBirth": "1980-01-01",
+      "photo": null,
+      "education": [
+        {
+          "univercityName": "MSU",
+          "dateOfStart": "2009",
+          "dateOfFinish": "2014"
+        },
+        {
+          "univercityName": "MGIMO",
+          "dateOfStart": "2014",
+          "dateOfFinish": "2019"
+        }
+      ],
+      "id": 3
+    }
+  ]
+}

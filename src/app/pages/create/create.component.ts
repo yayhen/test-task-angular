@@ -36,11 +36,7 @@ export class CreateComponent implements OnInit {
       dateOfBirth: ['1980-01-01', dateOfBirthValidator()],
       photo: [null],
       education: this.fb.array([
-        // this.fb.group({
-        //   univercityName: [''],
-        //   dateOfStart: [this.defaultYearStartEducation],
-        //   dateOfFinish: [this.defaulsYearFinishEducation]
-        // }, {validator: datesOfStudingValidator()})
+        
       ])
     })
   }

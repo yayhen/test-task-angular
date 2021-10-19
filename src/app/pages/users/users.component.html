@@ -1,18 +1,18 @@
-<div *ngIf="isLoading">
-  <app-spiner ></app-spiner>
-</div>
 <div class="search" style="max-width: 540px; margin: 0 auto">
   <div class="input-group">
-    <input class="form-control" id="search-input" (keyup)="searchInputHandler($event)" placeholder="Search">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchButtonHandler()">Find</button>
+    <input class="form-control" id="search-input" (keyup)="searchInputHandler($event)" placeholder="{{'users.search' | translate}}">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchButtonHandler()">{{'users.search' | translate}}</button>
   </div>
-  <ul class="search-results">
+  <ul class="search-results" *ngIf="searchResultsVisible">
     <li *ngFor="let result of searchResults; let i = index">
       <div class="search-result" [routerLink]="['/users/details', result.id]" *ngIf="i<10">
         <span>{{result.firstName}}</span>&nbsp;<span>{{result.lastName}}</span>
       </div>
     </li>
   </ul>
+</div>
+<div id="search-visible" (click)="closeSearchResults()" *ngIf="searchResultsVisible">
+
 </div>
 
 
@@ -21,11 +21,12 @@
     <div class="col-md-4">
       <img *ngIf="user.photo!=null" src={{user.photo}} class="img-fluid rounded-start" id={{user.id}} alt="Photo">
       <img *ngIf="user.photo==null" src="../../../assets/images/anonim.png" class="img-fluid rounded-start" id={{user.id}} alt="Photo">
+      <div class="online" appOnline false></div>
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title"><span>{{user.firstName}}</span>&nbsp;<span>{{user.lastName}}</span></h5>
-        <p *ngIf="this.loginService.getUserStatus()=='admin'" class="card-text"><small class="text-muted"><a [routerLink]="['/admin/edit', user.id]">Edit</a></small></p>
+        <p *ngIf="this.loginService.getUserStatus()=='admin'" class="card-text"><small class="text-muted"><a [routerLink]="['/admin/edit', user.id]">{{'users.edit' | translate}}</a></small></p>
       </div>
     </div>
   </div>

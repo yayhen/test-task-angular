@@ -1,62 +1,62 @@
 <div class="card" style="width: 18rem;">
   <form [formGroup]="createNewUserForm">
-    <label class="form-label" for="login">Login</label>
+    <label class="form-label" for="login">{{'create.login' | translate}}</label>
     <input class="form-control" type="text" id="login" formControlName="login">
     <label>
       <input type="radio" value="user" formControlName="userType">
-        <span>user</span>
+        <span>{{'create.user' | translate}}</span>
     </label>
     <label>
       <input type="radio" value="admin" formControlName="userType">
-        <span>admin</span>
+        <span>{{'create.admin' | translate}}</span>
     </label>
     <br/>
-    <label class="form-label" for="first-name">First name</label>
+    <label class="form-label" for="first-name">{{'create.firstName' | translate}}</label>
     <input class="form-control" type="text" id="first-name" formControlName="firstName">
     <div class="alert alert-danger"
         *ngIf="createNewUserForm.controls['firstName'].invalid && createNewUserForm.controls['firstName'].touched">
-      Plase enter coorect name
+        {{'create.incorrectName' | translate}}
     </div>
     <br />
-    <label class="form-label" for="last-name">Last name</label>
+    <label class="form-label" for="last-name">{{'create.lastName' | translate}}</label>
     <input class="form-control" type="text" id="last-name" formControlName="lastName">
     <div class="alert alert-danger"
         *ngIf="createNewUserForm.controls['lastName'].invalid && createNewUserForm.controls['lastName'].touched">
-      Plase enter corect last name
+        {{'create.incorrectLastName' | translate}}
     </div>
     <br />
-    <label class="form-label" for="date-of-birth">Date of birth</label>
+    <label class="form-label" for="date-of-birth">{{'create.dateOfBirth' | translate}}</label>
     <input type="date" id="date-of-birth" formControlName="dateOfBirth">
     <div class="alert alert-danger" *ngIf="createNewUserForm.controls['dateOfBirth'].errors?.dateOfBirthCorrect && createNewUserForm.controls['dateOfBirth'].touched">
-      Inncorrect date of birth
+      {{'create.incorrectDates' | translate}}
     </div>
     <div class="mb-3">
-      <label for="photo-input">Photo:</label>
+      <label for="photo-input">{{'create.photo' | translate}}:</label>
       <input type="file" id="photo-input" (change)="changePhotoPickerHandler($event)" formControlName="photo">
     </div>
     <div formArrayName="education" class="mb-4">
-      Education:
+      {{'create.education' | translate}}:
       <div *ngFor="let univercity of getEducations()['controls']; let i = index;">
         <form formGroupName={{i}}>
-          <label class="form-label" for="univercity">Univercity</label>
+          <label class="form-label" for="univercity">{{'create.univercity' | translate}}</label>
           <input class="form-control" type="text" id="univercity" formControlName="univercityName"><br />
-          <label class="form-label" for="univercity-start">Start</label>
+          <label class="form-label" for="univercity-start">{{'create.start' | translate}}</label>
           <select id="univercity-start" formControlName="dateOfStart">
             <option *ngFor="let year of educationYears" [selected]="year==2010">{{year}}</option>
           </select>
-          <label class="form-label" for="univercity-finish">finish</label>
+          <label class="form-label" for="univercity-finish">{{'create.finish' | translate}}</label>
           <select id="univercity-finish" formControlName="dateOfFinish">
             <option *ngFor="let year of educationYears" [selected]="year==2015">{{year}}</option>
           </select>
           <div class="alert alert-danger" *ngIf="createNewUserForm.controls['education'].get(i.toString())!.errors?.datesIsCorrect">
-            Inncorrect dates of education
+            {{'create.incorectDates' | translate}}
           </div>
           <button class="btn btn-danger btn-sm" (click)="deleteUniversity(i)">-</button>
         </form>
       </div>
-      <button class="btn btn-success btn-sm" (click)="addUnivercity()">Add</button>
+      <button class="btn btn-success btn-sm" (click)="addUnivercity()">{{'create.add' | translate}}</button>
     </div>
-    <button class="btn btn-primary mb-3" type="submit" (click)="addNewUser()" [disabled]="createNewUserForm.invalid">Create new user</button>
+    <button class="btn btn-primary mb-3" type="submit" (click)="addNewUser()" [disabled]="createNewUserForm.invalid">{{'create.createNewUser' | translate}}</button>
   </form>
 </div>
 

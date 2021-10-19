@@ -1,3 +1,57 @@
 {
-  "HELLO": "hello {{value}}"
+  "auth": {
+    "login": "Login",
+    "password": "Pasword",
+    "logIn": "Log in"
+  },
+  "create": {
+    "login": "Login",
+    "user": "User",
+    "admin": "Admin",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "inncorrectName": "Incorrect name",
+    "incorrectLastName": "Incorrect last name",
+    "dateOfBirth": "Date of birth",
+    "photo": "Photo",
+    "education": "Education",
+    "univercity": "Univercity",
+    "start": "Start",
+    "finish": "Finish",
+    "incorrectDates": "Incorrect dates",
+    "add": "Add",
+    "createNewUser": "Create new user"
+  },
+  "details": {
+    "yearsOld": "years old",
+    "education": "Education"
+  },
+  "edit": {
+    "login": "Login",
+    "user": "User",
+    "admin": "Admin",
+    "firstName": "FirstName",
+    "lastName": "LastName",
+    "inncorrectName": "Incorrect name",
+    "incorrectLastName": "Incorrect last name",
+    "dateOfBirth": "Date of birth",
+    "photo": "Photo",
+    "education": "Education",
+    "univercity": "Univercity",
+    "start": "Start",
+    "finish": "Finish",
+    "incorrectDates": "Incorrect dates",
+    "add": "Add",
+    "createNewUser": "Create new user",
+    "confirm": "Confirm",
+    "delete": "delete"
+  },
+  "users": {
+    "search": "Search",
+    "edit": "Edit"
+  },
+  "header": {
+    "createNewUser": "Create new user",
+    "users": "Users"
+  }
 }

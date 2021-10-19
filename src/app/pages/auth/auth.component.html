@@ -1,11 +1,11 @@
 <form [formGroup]="logInForm">
   <div class="mb-3">
-    <label for="log-in" class="form-label" >Login</label>
+    <label for="log-in" class="form-label" >{{'auth.login' | translate}}</label>
     <input type="text" class="form-control" id="log-in" formControlName="login" placeholder="Login"><br />
   </div>
   <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password"><br />
+    <label for="password" class="form-label">{{'auth.password' | translate}}</label>
+    <input type="password" id="password" class="form-control" formControlName="password" placeholder="{{'auth.password' | translate}}"><br />
   </div>
-  <button type="submit" class="btn btn-primary mb-3" (click)="submitButtonHandler()">Log in</button>
+  <button type="submit" class="btn btn-primary mb-3" (click)="submitButtonHandler()">{{'auth.logIn' | translate}}</button>
 </form>

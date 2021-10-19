@@ -12,13 +12,12 @@ export class UsersComponent implements OnInit {
   isModalDialogVisible: boolean = false;
   isDeletingUserId: number = NaN;
   searchResults: any = [];
-  isLoading = true;
+  searchResultsVisible = false;
 
   constructor(private dataService: DataService, public loginService: LoginService) { }
   
   ngOnInit(): void {
-    this.dataService.getUsersList().then(data => {this.users = data; this.isLoading = false;});
-    
+    this.dataService.getUsersList().then(data => {this.users = data;});
   }
 
   deleteUserButtonHandler(userId: number) {
@@ -44,17 +43,19 @@ export class UsersComponent implements OnInit {
     this.isModalDialogVisible = false;
   }
 
-  testAPI() {
-    this.dataService.searchData('pidor').then(data => console.log(data));
-  }
-
   searchInputHandler(event: any) {
-    this.dataService.searchData(event.target.value).then(data => this.searchResults = data);
+    this.searchResultsVisible = true;
+    this.dataService.searchData((event.target.value).replace(/[^a-zа-яё0-9\s]/gi, ' ')).then(data => this.searchResults = data);
   }
 
   searchButtonHandler() {
+    this.searchResultsVisible = false;
     if(this.searchResults.length!=0) {
       this.users = this.searchResults;
     }
+  }
+
+  closeSearchResults() {
+    this.searchResultsVisible = false;
   }
 }
